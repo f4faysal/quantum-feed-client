@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "",
+  title: "QuantumFeed | Home",
+  description: "QuantumFeed is a social media platform for developers.",
 };
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   // const { role, userId }: any = getUserInfo();

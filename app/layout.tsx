@@ -7,8 +7,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Opti Feed",
-  description: "",
+  title: "QuantumFeed",
+  description: "A feed reader for the modern web.",
 };
 
 export default function RootLayout({
