@@ -19,6 +19,10 @@ import { storeUserInfo } from "@/services/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
+  name: z.string().min(3, { message: "Name must be at least 3 characters" }),
+  username: z
+    .string()
+    .min(3, { message: "Username must be at least 3 characters" }),
   email: z.string().email({ message: "Invalid email address" }),
   hashedPassword: z
     .string()
@@ -59,7 +63,33 @@ const SingUpFrom = () => {
       <div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex flex-col gap-3">
+            <div className="grid grid-cols-2 gap-3 py-3">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input {...field} placeholder="Your full name" />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input {...field} placeholder="Username *" />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="grid grid-cols-1 gap-3">
               <FormField
                 control={form.control}
                 name="email"
@@ -90,12 +120,26 @@ const SingUpFrom = () => {
               />
             </div>
 
-            <Button
-              type="submit"
-              className="w-full mt-2 text-xl font-semibold "
-            >
-              Login
-            </Button>
+            <div className="py-5">
+              <p className="text-xs font-bold">
+                People who use our service may have uploaded your contact
+                information to <br /> Tuntuni Feed.{" "}
+                <a className="hover:underline text-blue-600" href="#">
+                  {" "}
+                  Learn more.
+                </a>
+              </p>
+            </div>
+
+            <div className="text-center">
+              <Button
+                type="submit"
+                className=" px-16 mt-2 text-xl font-semibold "
+                variant={"green"}
+              >
+                Sign Up
+              </Button>
+            </div>
           </form>
           <p className="text-red-600 text-sm">{res}</p>
         </Form>

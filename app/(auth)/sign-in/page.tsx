@@ -31,11 +31,7 @@ const SingIn = () => {
         </div>
       </div>
 
-      <MainModal
-        title="Sign Up
-"
-        description="It's quick and easy."
-      >
+      <MainModal title="Sign Up" description="It's quick and easy.">
         <SingUpFrom />
       </MainModal>
     </Container>
