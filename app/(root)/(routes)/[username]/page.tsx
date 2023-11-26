@@ -1,6 +1,8 @@
 "use client";
 
 import Header from "@/components/Header";
+import UserBio from "@/components/users/UserBio";
+import UserHero from "@/components/users/UserHero";
 import { useSelector } from "react-redux";
 
 interface UserProfileProps {
@@ -11,11 +13,13 @@ interface UserProfileProps {
 
 const UserProfile: React.FC<UserProfileProps> = ({ params }) => {
   const user = useSelector((state: any) => state.user.user);
-  console.log(user);
+
   return (
     <div>
       <Header showBackArrow label={user?.name} />
-      {params.username}
+      <UserHero username={user?.username} />
+      <UserBio username={user?.username} />
+      {/* <PostFeed username={user?.username} /> */}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { BsBellFill, BsHouseFill } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
@@ -49,14 +49,12 @@ const Sidebar = () => {
             <div className="flex flex-row items-center">
               <div className="relative rounded-full h-14 w-14 flex items-center justify-center p-4 hover:bg-blue-600 hover:bg-opacity-10 cursor-pointer lg:hidden">
                 <Avatar>
-                  <AvatarImage src="" />
-                  <AvatarFallback>FA</AvatarFallback>
+                  <AvatarImage src={`/avator.png` || user?.profileImage} />
                 </Avatar>
               </div>
               <div className="w-full relative hidden lg:flex  items-row gap-4 p-4 rounded-full hover:bg-blue-500 hover:bg-opacity-10 cursor-pointer items-center">
                 <Avatar>
-                  <AvatarImage src="" />
-                  <AvatarFallback>FA</AvatarFallback>
+                  <AvatarImage src={`/avator.png` || user?.profileImage} />
                 </Avatar>
 
                 <p className="hidden lg:block text-black text-xl capitalize">
