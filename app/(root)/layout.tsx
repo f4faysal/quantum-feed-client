@@ -1,5 +1,5 @@
-import FollowBar from "@/components/ui/layout/FollowBar";
-import Sidebar from "@/components/ui/layout/Sidebar";
+import FollowBar from "@/components/layout/FollowBar";
+import Sidebar from "@/components/layout/Sidebar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

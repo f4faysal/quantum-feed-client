@@ -1,12 +1,18 @@
+import LoginFrom from "@/components/LoginFrom";
+
 const SingIn = () => {
   return (
     <div className="h-full flex items-center justify-center gap-3">
       <div>
-        <h1 className="text-5xl font-bold">QuantumFeed</h1>
+        <h1 className="text-5xl font-bold">Tuntuni Feed</h1>
+        <p>
+          Tuntuni helps you connect <br /> and share with the people in your
+          life.
+        </p>
       </div>
       <div>
-        <div className="w-[400px] border h-[250px] rounded-lg bg-white shadow-md">
-          <h2 className="text-3xl font-bold">Sign Up</h2>
+        <div>
+          <LoginFrom />
         </div>
       </div>
     </div>
