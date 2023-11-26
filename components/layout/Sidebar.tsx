@@ -1,15 +1,25 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BsBellFill, BsHouseFill } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
+import { GiNestBirds } from "react-icons/gi";
+import { MdOutlineOndemandVideo } from "react-icons/md";
+import { useSelector } from "react-redux";
 import SidebarItem from "./SidebarItem";
-import SidebarLogo from "./SidebarLogo";
 
 const Sidebar = () => {
+  const user = useSelector((state: any) => state.user.user);
+
   const items = [
     {
       icon: BsHouseFill,
       label: "Home",
+      href: "/",
+    },
+    {
+      icon: FaUserFriends,
+      label: "Friends",
       href: "/",
     },
     {
@@ -20,10 +30,9 @@ const Sidebar = () => {
       alert: true,
     },
     {
-      icon: FaUser,
-      label: "Profile",
-      href: `/users/${"currentUser"}`,
-      auth: true,
+      icon: MdOutlineOndemandVideo,
+      label: "Video",
+      href: `/`,
     },
   ];
 
@@ -31,12 +40,62 @@ const Sidebar = () => {
     <div className="col-span-1 h-full pr-4 md:pr-6">
       <div className="flex flex-col items-end">
         <div className="space-y-2 lg:w-[230px]">
-          <SidebarLogo />
+          <div className=" flex gap-1 items-center py-2">
+            <GiNestBirds className="text-4xl text-blue-600" />
+            <h1 className="hidden md:block text-xl font-bold">Tuntuni</h1>
+          </div>
+          <div className="flex flex-row items-center">
+            <div
+              className="
+        relative
+        rounded-full 
+        h-14
+        w-14
+        flex
+        items-center
+        justify-center 
+        p-4
+        hover:bg-blue-600
+        hover:bg-opacity-10 
+        cursor-pointer 
+        lg:hidden
+      "
+            >
+              <Avatar>
+                <AvatarImage src="" />
+                <AvatarFallback>FA</AvatarFallback>
+              </Avatar>
+            </div>
+            <div
+              className="
+              w-full
+              relative
+               hidden 
+             lg:flex 
+             items-row 
+        gap-4 
+              p-4 
+            rounded-full 
+        hover:bg-blue-500
+        hover:bg-opacity-10 
+              cursor-pointer
+        items-center
+      "
+            >
+              <Avatar>
+                <AvatarImage src="" />
+                <AvatarFallback>FA</AvatarFallback>
+              </Avatar>
+
+              <p className="hidden lg:block text-black text-xl capitalize">
+                {user?.name}
+              </p>
+            </div>
+          </div>
           {items.map((item) => (
             <SidebarItem
               key={item.href}
               alert={item.alert}
-              auth={item.auth}
               href={item.href}
               icon={item.icon}
               label={item.label}
