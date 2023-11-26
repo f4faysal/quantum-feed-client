@@ -1,3 +1,4 @@
+import FollowBar from "@/components/ui/layout/FollowBar";
 import Sidebar from "@/components/ui/layout/Sidebar";
 import { Metadata } from "next";
 
@@ -35,7 +36,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
           >
             {children}
           </div>
-          {/* <FollowBar /> */}
+          <FollowBar />
         </div>
       </div>
     </div>
