@@ -1,25 +1,29 @@
+"use client";
+
 import FollowBar from "@/components/layout/FollowBar";
 import Sidebar from "@/components/layout/Sidebar";
-import { Metadata } from "next";
+import { getUserInfo } from "@/services/auth.service";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import Loading from "../loading";
 
-export const metadata: Metadata = {
-  title: "QuantumFeed | Home",
-  description: "QuantumFeed is a social media platform for developers.",
-};
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
-  // const { role, userId }: any = getUserInfo();
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { userId, username } = getUserInfo() as {
+    userId: string;
+    username: string;
+  };
 
-  // useEffect(() => {
-  //   if (!userId) {
-  //     redirect("/sign-in");
-  //   }
-  //   setIsLoading(true);
-  // }, [userId, role, isLoading]);
+  useEffect(() => {
+    if (!userId) {
+      redirect("/sign-in");
+    }
+    setIsLoading(true);
+  }, [userId, isLoading]);
 
-  // if (!isLoading) {
-  //   return <Loading />;
-  // }
+  if (!isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="h-screen">

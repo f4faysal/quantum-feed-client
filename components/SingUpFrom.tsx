@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUserLoginMutation } from "@/redux/api/authApi";
+import { useUserRegisterMutation } from "@/redux/api/authApi";
 import { storeUserInfo } from "@/services/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -31,7 +31,7 @@ const formSchema = z.object({
 
 const SingUpFrom = () => {
   const [res, setRes] = useState<any>(null);
-  const [userLogin] = useUserLoginMutation();
+  const [userRegister] = useUserRegisterMutation();
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -44,7 +44,7 @@ const SingUpFrom = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const res: any = await userLogin(values);
+      const res: any = await userRegister(values);
       if (res?.data?.accessToken) {
         router.push("/");
         form.reset();

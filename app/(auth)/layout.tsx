@@ -1,10 +1,19 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Facebook | Log in or sign up",
-  description: "",
-};
+import { getUserInfo } from "@/services/auth.service";
+import { useRouter } from "next/navigation";
+
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
+  const { userId, username } = getUserInfo() as {
+    userId: string;
+    username: string;
+  };
+
+  if (userId && username) {
+    router.push("/");
+  }
+
   return <>{children}</>;
 };
 
