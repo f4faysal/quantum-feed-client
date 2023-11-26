@@ -4,9 +4,9 @@ const SingIn = () => {
   return (
     <div className="h-full flex items-center justify-center gap-3">
       <div>
-        <h1 className="text-5xl font-bold">Tuntuni Feed</h1>
-        <p>
-          Tuntuni helps you connect <br /> and share with the people in your
+        <h1 className="text-[55px] font-bold text-blue-600">Tuntuni Feed</h1>
+        <p className="text-xl text-gray-800 ">
+          Tuntuni helps you connect and <br /> share with the people in your
           life.
         </p>
       </div>
