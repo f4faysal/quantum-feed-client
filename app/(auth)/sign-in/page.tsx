@@ -1,5 +1,7 @@
 import LoginFrom from "@/components/LoginFrom";
+import SingUpFrom from "@/components/SingUpFrom";
 import Container from "@/components/layout/container";
+import MainModal from "@/components/modals/main-modal";
 
 const SingIn = () => {
   return (
@@ -28,6 +30,14 @@ const SingIn = () => {
           </div>
         </div>
       </div>
+
+      <MainModal
+        title="Sign Up
+"
+        description="It's quick and easy."
+      >
+        <SingUpFrom />
+      </MainModal>
     </Container>
   );
 };

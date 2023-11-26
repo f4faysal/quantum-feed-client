@@ -15,11 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useUserLoginMutation } from "@/redux/api/authApi";
-import { onOpen } from "@/redux/features/modal/modalSlice";
 import { storeUserInfo } from "@/services/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useDispatch } from "react-redux";
-import { Separator } from "./ui/separator";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -28,13 +25,9 @@ const formSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters" }),
 });
 
-const LoginFrom = () => {
+const SingUpFrom = () => {
   const [res, setRes] = useState<any>(null);
-
-  const dispatch = useDispatch();
-
   const [userLogin] = useUserLoginMutation();
-
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,7 +45,7 @@ const LoginFrom = () => {
         router.push("/");
         form.reset();
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        toast.success("User logged in successfully!");
+        toast.success("User Sign up successfully!");
       } else {
         toast.error(res?.error);
         setRes(res?.error);
@@ -61,10 +54,9 @@ const LoginFrom = () => {
       toast.error(err.message);
     }
   };
-
   return (
-    <div className=" flex items-center justify-center">
-      <div className="w-full bg-white shadow-lg  md:w-[370px] h-auto  border  rounded-md px-4 py-5 grid grid-flow-row  auto-rows-max gap-2">
+    <div>
+      <div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-3">
@@ -105,27 +97,11 @@ const LoginFrom = () => {
               Login
             </Button>
           </form>
-
-          <div className=" text-center  mt-1">
-            <a href="#" className="text-blue-500 text-sm hover:underline">
-              Forgot Password?
-            </a>
-          </div>
           <p className="text-red-600 text-sm">{res}</p>
         </Form>
-        <Separator />
-        <div className="text-center my-4  ">
-          <Button
-            onClick={() => dispatch(onOpen())}
-            className=" text-base font-semibold  "
-            variant="green"
-          >
-            Create new account
-          </Button>
-        </div>
       </div>
     </div>
   );
 };
 
-export default LoginFrom;
+export default SingUpFrom;
