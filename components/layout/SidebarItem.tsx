@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useCallback } from "react";
 import { IconType } from "react-icons";
 
 import { BsDot } from "react-icons/bs";
@@ -22,9 +22,13 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   alert,
 }) => {
   const router = useRouter();
-
+  const handleClick = useCallback(() => {
+    if (href) {
+      router.push(href);
+    }
+  }, [href, router]);
   return (
-    <div className="flex flex-row items-center">
+    <div onClick={handleClick} className="flex flex-row items-center">
       <div
         className="
         relative

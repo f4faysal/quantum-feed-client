@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { BiLogOut } from "react-icons/bi";
 import { BsBellFill, BsHouseFill } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
 import { GiNestBirds } from "react-icons/gi";
@@ -72,8 +73,7 @@ const Sidebar = () => {
               label={item.label}
             />
           ))}
-          {/* {currentUser && <SidebarItem icon={BiLogOut} label="Logout" />}
-          <SidebarTweetButton /> */}
+          <SidebarItem icon={BiLogOut} label="Logout" />
         </div>
       </div>
     </div>

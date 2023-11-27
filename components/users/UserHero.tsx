@@ -21,7 +21,7 @@ const UserHero: React.FC<UserHeroProps> = ({ username }) => {
           />
         )}
         <div className="absolute -bottom-16 left-4">
-          <Avatar userId={user} isLarge hasBorder />
+          <Avatar userId={user?.profileImage} isLarge hasBorder />
         </div>
       </div>
     </div>
