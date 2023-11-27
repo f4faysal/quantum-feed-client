@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
-import { useCreatePostMutation } from "@/redux/api/postAip";
+import { useCreateCommentMutation } from "@/redux/api/commentApi";
 import Avatar from "../Avatar";
 import Button from "../Button";
 
@@ -14,8 +14,12 @@ interface FormProps {
   postId?: string;
 }
 
-const PostForm: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
-  const [createPost] = useCreatePostMutation();
+const CommentForm: React.FC<FormProps> = ({
+  placeholder,
+  isComment,
+  postId,
+}) => {
+  const [createComment] = useCreateCommentMutation();
 
   const currentUser = useSelector((state: any) => state.user.user);
 
@@ -23,22 +27,24 @@ const PostForm: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = useCallback(async () => {
+    console.log("body", body);
     try {
       const data = {
         body,
         userId: currentUser?.id,
+        postId,
       };
       setIsLoading(true);
-      const res = await createPost(data);
+      const res = await createComment(data);
       console.log("body", res);
-      toast.success("Tuntuni Post created");
+      toast.success("Commented");
       setBody("");
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
-  }, [body, createPost, currentUser?.id]);
+  }, [body, createComment, currentUser?.id, postId]);
 
   return (
     <div className="border-b-[1px] border px-5 py-2">
@@ -79,7 +85,7 @@ const PostForm: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
             <Button
               disabled={isLoading || !body}
               onClick={onSubmit}
-              label="Post"
+              label="Reply"
             />
           </div>
         </div>
@@ -88,4 +94,4 @@ const PostForm: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
   );
 };
 
-export default PostForm;
+export default CommentForm;

@@ -5,12 +5,9 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { useCallback, useMemo } from "react";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 
-// import useCurrentUser from "@/hooks/useCurrentUser";
-// import useLike from "@/hooks/useLike";
-// import useLoginModal from "@/hooks/useLoginModal";
-
 import { useLikePostMutation } from "@/redux/api/postAip";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Avatar from "../Avatar";
 interface PostItemProps {
@@ -20,11 +17,7 @@ interface PostItemProps {
 
 const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const router = useRouter();
-  //   const loginModal = useLoginModal();
-  const currentUser = useSelector((state: any) => state.user.user);
-
   const [likePost] = useLikePostMutation();
-  //   const { hasLiked, toggleLike } = useLike({ postId: data.id, userId });
 
   const goToUser = useCallback(
     (ev: any) => {
@@ -41,8 +34,8 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const onLike = useCallback(
     async (ev: any) => {
       ev.stopPropagation();
-      const res = await likePost(data?.id);
-      console.log(res);
+      await likePost(data?.id);
+      toast.success("Liked");
     },
     [likePost, data?.id]
   );

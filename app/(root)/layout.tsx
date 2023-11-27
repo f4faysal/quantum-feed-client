@@ -1,6 +1,5 @@
 "use client";
 
-import FollowBar from "@/components/layout/FollowBar";
 import Sidebar from "@/components/layout/Sidebar";
 import Container from "@/components/layout/container";
 import { getUserInfo } from "@/services/auth.service";
@@ -42,7 +41,7 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
             >
               {children}
             </div>
-            <FollowBar />
+            {/* <FollowBar /> */}
           </div>
         </div>
       </Container>

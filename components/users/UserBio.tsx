@@ -7,6 +7,7 @@ import {
 import { onOpen } from "@/redux/features/modal/modalSlice";
 import { format } from "date-fns";
 import { useMemo } from "react";
+import toast from "react-hot-toast";
 import { BiCalendar } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
@@ -29,7 +30,8 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
   //   const { isFollowing, toggleFollow } = useFollow(userId);
 
   const toggleFollow = async () => {
-    const res = await followUser(data?.id);
+    await followUser(data?.id);
+    toast.success("Followed");
   };
 
   const createdAt = useMemo(() => {

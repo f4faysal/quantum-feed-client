@@ -2,8 +2,8 @@ import { formatDistanceToNowStrict } from "date-fns";
 
 import { useCallback, useMemo } from "react";
 
-import Avatar from "../Avatar";
 import { useRouter } from "next/navigation";
+import Avatar from "../Avatar";
 
 interface CommentItemProps {
   data: Record<string, any>;
@@ -33,21 +33,21 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
     <div
       className="
         border-b-[1px] 
-        border-neutral-800 
+        border
         p-5 
         cursor-pointer 
-        hover:bg-neutral-900 
+        hover:bg-white
         transition
       "
     >
       <div className="flex flex-row items-start gap-3">
-        <Avatar userId={data.user.id} />
+        <Avatar userId={data?.user?.profileImage} />
         <div>
           <div className="flex flex-row items-center gap-2">
             <p
               onClick={goToUser}
               className="
-                text-white 
+               
                 font-semibold 
                 cursor-pointer 
                 hover:underline
@@ -69,7 +69,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ data = {} }) => {
             </span>
             <span className="text-neutral-500 text-sm">{createdAt}</span>
           </div>
-          <div className="text-white mt-1">{data.body}</div>
+          <div className=" mt-1">{data.body}</div>
         </div>
       </div>
     </div>
