@@ -1,8 +1,12 @@
 "use clint";
-
+import { onOpen } from "@/redux/features/modal/modalSlice";
+import { format } from "date-fns";
+import { useMemo } from "react";
 import { BiCalendar } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
+import MainModal from "../modals/main-modal";
+import EditProfileForm from "../form/EditProfileForm";
 
 interface UserBioProps {
   username: string;
@@ -11,27 +15,26 @@ interface UserBioProps {
 const UserBio: React.FC<UserBioProps> = ({ username }) => {
   const user = useSelector((state: any) => state.user.user);
 
+  const dispatch = useDispatch();
+
   //   const { isFollowing, toggleFollow } = useFollow(userId);
 
-  //   const createdAt = useMemo(() => {
-  //     if (!fetchedUser?.createdAt) {
-  //       return null;
-  //     }
+  const createdAt = useMemo(() => {
+    if (!user?.createdAt) {
+      return null;
+    }
 
-  //     return format(new Date(fetchedUser.createdAt), "MMMM yyyy");
-  //   }, [fetchedUser?.createdAt]);
+    return format(new Date(user.createdAt), "MMMM yyyy");
+  }, [user?.createdAt]);
 
   return (
-    <div className="border-b-[1px] border-neutral-800 pb-4">
+    <div className="border-b-[1px] border- pb-4">
+      <MainModal title="Edit your profile" description="It's quick and easy.">
+        <EditProfileForm />
+      </MainModal>
       <div className="flex justify-end p-2">
         {user?.id ? (
-          <Button
-            secondary
-            label="Edit"
-            onClick={() => {
-              console.log("hi");
-            }}
-          />
+          <Button secondary label="Edit" onClick={() => dispatch(onOpen())} />
         ) : (
           <Button
             onClick={() => {
@@ -62,16 +65,16 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
           "
           >
             <BiCalendar size={24} />
-            <p>Joined {}</p>
+            <p>Joined {createdAt}</p>
           </div>
         </div>
         <div className="flex flex-row items-center mt-4 gap-6">
           <div className="flex flex-row items-center gap-1">
-            <p className="text-white">{user?.followingIds?.length || 0}</p>
+            <p className="">{user?.followingIds?.length || 0}</p>
             <p className="text-neutral-500">Following</p>
           </div>
           <div className="flex flex-row items-center gap-1">
-            <p className="text-white">{user?.followersCount || 0}</p>
+            <p className="">{user?.followersCount || 0}</p>
             <p className="text-neutral-500">Followers</p>
           </div>
         </div>

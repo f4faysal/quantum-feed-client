@@ -1,7 +1,8 @@
-import LoginFrom from "@/components/LoginFrom";
-import SingUpFrom from "@/components/SingUpFrom";
+import LoginFrom from "@/components/form/LoginFrom";
+import SingUpFrom from "@/components/form/SingUpFrom";
 import Container from "@/components/layout/container";
 import MainModal from "@/components/modals/main-modal";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

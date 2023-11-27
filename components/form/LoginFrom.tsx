@@ -19,7 +19,7 @@ import { onOpen } from "@/redux/features/modal/modalSlice";
 import { storeUserInfo } from "@/services/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
-import { Separator } from "./ui/separator";
+import { Separator } from "../ui/separator";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
