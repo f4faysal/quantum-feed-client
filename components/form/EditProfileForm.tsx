@@ -33,17 +33,39 @@ const EditProfileForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = useCallback(async () => {
+    const updateData = {
+      profileImage,
+      coverImage,
+      name,
+      username,
+      bio,
+    };
     try {
       setIsLoading(true);
-      const res = await updateUser({});
-      console.log(res);
-      toast.success("Updated");
+      const res: any = await updateUser({
+        data: updateData,
+        id: currentUser?.id,
+      });
+
+      if (res?.data) {
+        toast.success("Updated");
+      } else {
+        toast.error("Something went wrong");
+      }
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
-  }, [updateUser, setIsLoading]);
+  }, [
+    profileImage,
+    coverImage,
+    name,
+    username,
+    bio,
+    updateUser,
+    currentUser?.id,
+  ]);
 
   return (
     <div>
