@@ -51,6 +51,23 @@ export const authApi = baseApi.injectEndpoints({
 
       providesTags: [tagTypes.user],
     }),
+
+    // follow user
+    followUser: build.mutation({
+      query: (id) => ({
+        url: `${AUTH_URL}/follow/${id}`,
+        method: "POST",
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
+    //follow-count
+    followCount: build.query({
+      query: (username) => ({
+        url: `${AUTH_URL}/follow-count/${username}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -60,4 +77,6 @@ export const {
   useUpdateUserMutation,
   useMyProfileQuery,
   useUserByUsernameQuery,
+  useFollowUserMutation,
+  useFollowCountQuery,
 } = authApi;

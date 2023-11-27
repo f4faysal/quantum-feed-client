@@ -1,5 +1,9 @@
 "use clint";
-import { useUserByUsernameQuery } from "@/redux/api/authApi";
+import FollowCount from "@/lib/followCount";
+import {
+  useFollowUserMutation,
+  useUserByUsernameQuery,
+} from "@/redux/api/authApi";
 import { onOpen } from "@/redux/features/modal/modalSlice";
 import { format } from "date-fns";
 import { useMemo } from "react";
@@ -18,9 +22,15 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
 
   const { data, isLoading } = useUserByUsernameQuery(username);
 
+  const [followUser] = useFollowUserMutation();
+
   const dispatch = useDispatch();
 
   //   const { isFollowing, toggleFollow } = useFollow(userId);
+
+  const toggleFollow = async () => {
+    const res = await followUser(data?.id);
+  };
 
   const createdAt = useMemo(() => {
     if (!user?.createdAt) {
@@ -40,10 +50,7 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
           <Button secondary label="Edit" onClick={() => dispatch(onOpen())} />
         ) : (
           <Button
-            onClick={() => {
-              console.log("hi");
-            }}
-            //   onClick={toggleFollow}
+            onClick={toggleFollow}
             label={false ? "UnFollow" : "Follow"}
             secondary={!false}
             outline={false}
@@ -77,7 +84,7 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
             <p className="text-neutral-500">Following</p>
           </div>
           <div className="flex flex-row items-center gap-1">
-            <p className="">{data?.followersCount || 0}</p>
+            <FollowCount username={username} />
             <p className="text-neutral-500">Followers</p>
           </div>
         </div>
