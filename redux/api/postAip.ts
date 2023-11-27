@@ -59,6 +59,15 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.post],
     }),
+
+    // like post
+    likePost: build.mutation({
+      query: (id) => ({
+        url: `${POST_API}/like/${id}`,
+        method: "POST",
+      }),
+      invalidatesTags: [tagTypes.post],
+    }),
   }),
 });
 
@@ -69,4 +78,5 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
   usePostsByUserQuery,
+  useLikePostMutation,
 } = postApi;

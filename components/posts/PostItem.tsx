@@ -9,6 +9,7 @@ import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
 // import useLike from "@/hooks/useLike";
 // import useLoginModal from "@/hooks/useLoginModal";
 
+import { useLikePostMutation } from "@/redux/api/postAip";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import Avatar from "../Avatar";
@@ -22,6 +23,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   //   const loginModal = useLoginModal();
   const currentUser = useSelector((state: any) => state.user.user);
 
+  const [likePost] = useLikePostMutation();
   //   const { hasLiked, toggleLike } = useLike({ postId: data.id, userId });
 
   const goToUser = useCallback(
@@ -36,20 +38,17 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
     router.push(`/posts/${data.id}`);
   }, [router, data.id]);
 
-  const onLike = useCallback(async (ev: any) => {
-    ev.stopPropagation();
-
-    //  if (!currentUser) {
-    //    return loginModal.onOpen();
-    //  }
-
-    //  toggleLike();
-  }, []);
+  const onLike = useCallback(
+    async (ev: any) => {
+      ev.stopPropagation();
+      const res = await likePost(data?.id);
+      console.log(res);
+    },
+    [likePost, data?.id]
+  );
 
   //   const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
-  const LikeIcon = true ? AiFillHeart : AiOutlineHeart;
-
-  console.log(data);
+  const LikeIcon = data?.likedIds.length ? AiFillHeart : AiOutlineHeart;
 
   const createdAt = useMemo(() => {
     if (!data?.createdAt) {

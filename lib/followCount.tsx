@@ -11,7 +11,7 @@ const FollowCount: React.FC<followCountProps> = ({ username }) => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  return <p className="">{data}</p>;
+  return <p className="">{data || 0}</p>;
 };
 
 export default FollowCount;
