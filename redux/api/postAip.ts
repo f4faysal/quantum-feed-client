@@ -23,6 +23,15 @@ export const postApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.post],
     }),
 
+    // get all posts by user
+    postsByUser: build.query({
+      query: (id) => ({
+        url: `${POST_API}/my-post/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.post],
+    }),
+
     // get single post
     post: build.query({
       query: (id) => ({
@@ -59,4 +68,5 @@ export const {
   usePostQuery,
   useUpdatePostMutation,
   useDeletePostMutation,
+  usePostsByUserQuery,
 } = postApi;

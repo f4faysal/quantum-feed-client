@@ -1,12 +1,13 @@
 "use clint";
+import { useUserByUsernameQuery } from "@/redux/api/authApi";
 import { onOpen } from "@/redux/features/modal/modalSlice";
 import { format } from "date-fns";
 import { useMemo } from "react";
 import { BiCalendar } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
-import MainModal from "../modals/main-modal";
 import EditProfileForm from "../form/EditProfileForm";
+import MainModal from "../modals/main-modal";
 
 interface UserBioProps {
   username: string;
@@ -14,6 +15,8 @@ interface UserBioProps {
 
 const UserBio: React.FC<UserBioProps> = ({ username }) => {
   const user = useSelector((state: any) => state.user.user);
+
+  const { data, isLoading } = useUserByUsernameQuery(username);
 
   const dispatch = useDispatch();
 
@@ -26,14 +29,14 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
 
     return format(new Date(user.createdAt), "MMMM yyyy");
   }, [user?.createdAt]);
-
+  if (isLoading) return <div>Loading...</div>;
   return (
     <div className="border-b-[1px] border- pb-4">
       <MainModal title="Edit your profile" description="It's quick and easy.">
         <EditProfileForm />
       </MainModal>
       <div className="flex justify-end p-2">
-        {user?.id ? (
+        {user?.id === data?.id ? (
           <Button secondary label="Edit" onClick={() => dispatch(onOpen())} />
         ) : (
           <Button
@@ -41,7 +44,7 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
               console.log("hi");
             }}
             //   onClick={toggleFollow}
-            label={false ? "Unfollow" : "Follow"}
+            label={false ? "UnFollow" : "Follow"}
             secondary={!false}
             outline={false}
           />
@@ -49,11 +52,11 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
       </div>
       <div className="mt-8 px-4">
         <div className="flex flex-col">
-          <p className="capitalize text-2xl font-semibold">{user?.name}</p>
-          <p className="text-md text-neutral-500">@{user?.username}</p>
+          <p className="capitalize text-2xl font-semibold">{data?.name}</p>
+          <p className="text-md text-neutral-500">@{data?.username}</p>
         </div>
         <div className="flex flex-col mt-4">
-          <p className="">{user?.bio}</p>
+          <p className="">{data?.bio}</p>
           <div
             className="
               flex 
@@ -70,11 +73,11 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
         </div>
         <div className="flex flex-row items-center mt-4 gap-6">
           <div className="flex flex-row items-center gap-1">
-            <p className="">{user?.followingIds?.length || 0}</p>
+            <p className="">{data?.followingIds?.length || 0}</p>
             <p className="text-neutral-500">Following</p>
           </div>
           <div className="flex flex-row items-center gap-1">
-            <p className="">{user?.followersCount || 0}</p>
+            <p className="">{data?.followersCount || 0}</p>
             <p className="text-neutral-500">Followers</p>
           </div>
         </div>

@@ -27,9 +27,9 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const goToUser = useCallback(
     (ev: any) => {
       ev.stopPropagation();
-      router.push(`/users/${data.user.id}`);
+      router.push(`/${data.user.username}`);
     },
-    [router, data.user.id]
+    [router, data.user.username]
   );
 
   const goToPost = useCallback(() => {
@@ -48,6 +48,8 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
 
   //   const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
   const LikeIcon = true ? AiFillHeart : AiOutlineHeart;
+
+  console.log(data);
 
   const createdAt = useMemo(() => {
     if (!data?.createdAt) {
@@ -70,7 +72,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
       "
     >
       <div className="flex flex-row items-start gap-3">
-        <Avatar userId={currentUser?.profileImage} />
+        <Avatar userId={data?.user?.profileImage} />
         <div>
           <div className="flex flex-row items-center gap-2">
             <p

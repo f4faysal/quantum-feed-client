@@ -41,6 +41,16 @@ export const authApi = baseApi.injectEndpoints({
 
       providesTags: [tagTypes.user],
     }),
+
+    // get user by username
+    userByUsername: build.query({
+      query: (username) => ({
+        url: `${AUTH_URL}/${username}`,
+        method: "GET",
+      }),
+
+      providesTags: [tagTypes.user],
+    }),
   }),
 });
 
@@ -49,4 +59,5 @@ export const {
   useUserRegisterMutation,
   useUpdateUserMutation,
   useMyProfileQuery,
+  useUserByUsernameQuery,
 } = authApi;

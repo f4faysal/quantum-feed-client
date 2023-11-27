@@ -1,9 +1,10 @@
 "use client";
 
 import Header from "@/components/Header";
+import MyPostFeed from "@/components/posts/MyPostFeed";
 import UserBio from "@/components/users/UserBio";
 import UserHero from "@/components/users/UserHero";
-import { useSelector } from "react-redux";
+import { useUserByUsernameQuery } from "@/redux/api/authApi";
 
 interface UserProfileProps {
   params: {
@@ -12,14 +13,15 @@ interface UserProfileProps {
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({ params }) => {
-  const user = useSelector((state: any) => state.user.user);
+  const { data, isLoading } = useUserByUsernameQuery(params.username);
 
+  if (isLoading) return <div>Loading...</div>;
   return (
     <div>
-      <Header showBackArrow label={user?.name} />
-      <UserHero username={user?.username} />
-      <UserBio username={user?.username} />
-      {/* <PostFeed username={user?.username} /> */}
+      <Header showBackArrow label={data?.name} />
+      <UserHero username={data?.username} />
+      <UserBio username={data?.username} />
+      <MyPostFeed user={data} />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 "use client";
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { authKey } from "@/constants/storageKey";
+import { removeUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 import { BiLogOut } from "react-icons/bi";
 import { BsBellFill, BsHouseFill } from "react-icons/bs";
@@ -73,7 +75,14 @@ const Sidebar = () => {
               label={item.label}
             />
           ))}
-          <SidebarItem icon={BiLogOut} label="Logout" />
+          <SidebarItem
+            onClick={() => {
+              removeUserInfo(authKey);
+              window.location.reload();
+            }}
+            icon={BiLogOut}
+            label="Logout"
+          />
         </div>
       </div>
     </div>

@@ -1,15 +1,15 @@
 "use client";
 
-import { usePostsQuery } from "@/redux/api/postAip";
+import { usePostsByUserQuery } from "@/redux/api/postAip";
 import { ClipLoader } from "react-spinners";
 import PostItem from "./PostItem";
 
-interface PostFeedProps {
-  username?: string;
+interface MyPostFeedProps {
+  user?: Record<string, any>;
 }
 
-const PostFeed: React.FC<PostFeedProps> = () => {
-  const { data, isLoading } = usePostsQuery({});
+const MyPostFeed: React.FC<MyPostFeedProps> = ({ user }) => {
+  const { data, isLoading } = usePostsByUserQuery(user?.id);
 
   const posts = data || [];
 
@@ -19,7 +19,6 @@ const PostFeed: React.FC<PostFeedProps> = () => {
         <ClipLoader color="lightblue" size={80} />
       </div>
     );
-
   return (
     <>
       {posts.map((post: Record<string, any>) => (
@@ -29,4 +28,4 @@ const PostFeed: React.FC<PostFeedProps> = () => {
   );
 };
 
-export default PostFeed;
+export default MyPostFeed;
