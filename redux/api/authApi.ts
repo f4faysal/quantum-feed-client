@@ -34,8 +34,8 @@ export const authApi = baseApi.injectEndpoints({
     }),
     // My Profile
     myProfile: build.query({
-      query: (username) => ({
-        url: `${AUTH_URL}/profile/${username}`,
+      query: (id) => ({
+        url: `${AUTH_URL}/profile/${id}`,
         method: "GET",
       }),
 

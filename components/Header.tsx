@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ showBackArrow, label }) => {
     username: string;
   };
   const dispatch = useAppDispatch();
-  const { data, isLoading } = useMyProfileQuery(username);
+  const { data, isLoading } = useMyProfileQuery(userId);
 
   useEffect(() => {
     dispatch(setUser(data));

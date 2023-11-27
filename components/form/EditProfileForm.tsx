@@ -1,12 +1,15 @@
 import { useUpdateUserMutation } from "@/redux/api/authApi";
+import { onClose } from "@/redux/features/modal/modalSlice";
 import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
 import Input from "../Input";
 
 const EditProfileForm = () => {
   const currentUser = useSelector((state: any) => state.user.user);
+
+  const dispatch = useDispatch();
 
   const [updateUser] = useUpdateUserMutation();
 
@@ -49,8 +52,16 @@ const EditProfileForm = () => {
 
       if (res?.data) {
         toast.success("Updated");
+        dispatch(onClose());
       } else {
-        toast.error("Something went wrong");
+        toast(`'${username}' is already taken`, {
+          icon: "⚠️",
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -58,13 +69,14 @@ const EditProfileForm = () => {
       setIsLoading(false);
     }
   }, [
-    profileImage,
-    coverImage,
-    name,
-    username,
     bio,
-    updateUser,
+    coverImage,
     currentUser?.id,
+    dispatch,
+    name,
+    profileImage,
+    updateUser,
+    username,
   ]);
 
   return (
