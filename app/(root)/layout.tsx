@@ -26,11 +26,12 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-screen ">
       <Container>
         <div className="h-full ">
           <div className="grid grid-cols-4 h-full">
             <Sidebar />
+
             <div
               className="
             col-span-3 

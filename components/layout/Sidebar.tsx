@@ -4,11 +4,12 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { authKey } from "@/constants/storageKey";
 import { removeUserInfo } from "@/services/auth.service";
 import Link from "next/link";
-import { BiLogOut } from "react-icons/bi";
 import { BsBellFill, BsHouseFill } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
+import { FaVideo } from "react-icons/fa6";
 import { GiNestBirds } from "react-icons/gi";
-import { MdOutlineOndemandVideo } from "react-icons/md";
+import { IoMdSettings } from "react-icons/io";
+import { IoLogOut } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import SidebarItem from "./SidebarItem";
 
@@ -24,7 +25,7 @@ const Sidebar = () => {
     {
       icon: FaUserFriends,
       label: "Friends",
-      href: "/",
+      href: "/friends",
     },
     {
       icon: BsBellFill,
@@ -34,15 +35,20 @@ const Sidebar = () => {
       alert: user?.hasNotification,
     },
     {
-      icon: MdOutlineOndemandVideo,
+      icon: FaVideo,
       label: "Video",
-      href: `/`,
+      href: `/video`,
+    },
+    {
+      icon: IoMdSettings,
+      label: "Settings",
+      href: `/settings`,
     },
   ];
 
   return (
-    <div className="col-span-1 h-full pr-4 md:pr-6">
-      <div className="flex flex-col items-end">
+    <div className="relative  col-span-1 h-full pr-4 md:pr-6">
+      <div className="sticky top-0  flex flex-col items-end">
         <div className="space-y-2 lg:w-[230px]">
           <div className=" flex gap-1 items-center py-2">
             <GiNestBirds className="text-4xl text-sky-500" />
@@ -80,7 +86,7 @@ const Sidebar = () => {
               removeUserInfo(authKey);
               window.location.reload();
             }}
-            icon={BiLogOut}
+            icon={IoLogOut}
             label="Logout"
           />
         </div>
