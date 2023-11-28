@@ -68,6 +68,22 @@ export const authApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    // forgot password
+    forgotPassword: build.mutation({
+      query: (email) => ({
+        url: `${AUTH_URL}/forgot-password`,
+        method: "POST",
+        data: email,
+      }),
+    }),
+    // reset password
+    resetPassword: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/reset-password`,
+        method: "POST",
+        data: data,
+      }),
+    }),
   }),
 });
 
@@ -79,4 +95,6 @@ export const {
   useUserByUsernameQuery,
   useFollowUserMutation,
   useFollowCountQuery,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = authApi;
