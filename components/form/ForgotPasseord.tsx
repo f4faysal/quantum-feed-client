@@ -36,18 +36,16 @@ const ForgotPassword = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(values);
-      const res = await forgotPassword(values);
-      console.log(res);
-      // if (res?.data?.accessToken) {
-      //   router.push("/");
-      //   form.reset();
-      //   storeUserInfo({ accessToken: res?.data?.accessToken });
-      //   toast.success("User Sign up successfully!");
-      // } else {
-      //   toast.error(res?.error);
-      //   setRes(res?.error);
-      // }
+      const res: any = await forgotPassword(values);
+
+      if (res?.data?.message) {
+        router.push("/sign-in");
+        form.reset();
+        toast.success("Check your email for reset password link!");
+      } else {
+        toast.error(res?.error);
+        setRes(res?.error);
+      }
     } catch (err: any) {
       toast.error(err.message);
     }
