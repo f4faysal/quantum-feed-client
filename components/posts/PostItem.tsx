@@ -1,11 +1,26 @@
 "use client";
 
+import * as React from "react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import { formatDistanceToNowStrict } from "date-fns";
 
 import { useCallback, useMemo } from "react";
 import { AiFillHeart, AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 
-import { useLikePostMutation } from "@/redux/api/postAip";
+import {
+  useDeletePostMutation,
+  useLikePostMutation,
+} from "@/redux/api/postAip";
+import { Edit, Share, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -18,6 +33,9 @@ interface PostItemProps {
 const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const router = useRouter();
   const [likePost] = useLikePostMutation();
+  const [deletePost] = useDeletePostMutation();
+
+  const user = useSelector((state: any) => state.user.user);
 
   const goToUser = useCallback(
     (ev: any) => {
@@ -40,6 +58,15 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
     [likePost, data?.id]
   );
 
+  const handelDelete = async () => {
+    const res: any = await deletePost(data?.id);
+    if (res?.data) {
+      toast.success("Deleted post successfully");
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
+
   //   const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
   const LikeIcon = data?.likedIds.length ? AiFillHeart : AiOutlineHeart;
 
@@ -53,7 +80,6 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
 
   return (
     <div
-      onClick={goToPost}
       className="
         border-b-[1px] 
         border
@@ -61,9 +87,11 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
         cursor-pointer 
         hover:bg-white
         transition
+        flex
+        justify-between
       "
     >
-      <div className="flex flex-row items-start gap-3">
+      <div onClick={goToPost} className="flex flex-row items-start gap-3">
         <Avatar userId={data?.user?.profileImage} />
         <div>
           <div className="flex flex-row items-center gap-2">
@@ -128,6 +156,41 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div>
+        {user?.id === data?.userId && (
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <span className="text-xl">
+                <HiOutlineDotsVertical />
+              </span>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => {
+                  toast.success("Shared post Coming soon");
+                }}
+              >
+                <Share className="mr-2 h-4 w-4" />
+                <span>Share</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handelDelete}>
+                <Trash className="mr-2 h-4 w-4 text-red-600" />
+                <span>Delete</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  toast.success("Edited Coming soon");
+                }}
+              >
+                <Edit className="mr-2 h-4 w-4" />
+                <span>Edit</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </div>
   );

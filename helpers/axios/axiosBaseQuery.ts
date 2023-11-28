@@ -1,4 +1,3 @@
-import { IMeta } from "@/types";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import type { AxiosError, AxiosRequestConfig } from "axios";
 import { instance as axiosInstance } from "./axiosInstance";
@@ -12,7 +11,7 @@ export const axiosBaseQuery =
       method: AxiosRequestConfig["method"];
       data?: AxiosRequestConfig["data"];
       params?: AxiosRequestConfig["params"];
-      meta?: IMeta;
+      meta?: any;
       contentType?: string;
     },
     unknown,
