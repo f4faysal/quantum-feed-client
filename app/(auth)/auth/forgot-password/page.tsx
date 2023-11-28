@@ -50,7 +50,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen w-full flex justify-center items-center">
       <div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -67,12 +67,8 @@ const ForgotPassword = () => {
               )}
             />
 
-            <div className="text-center">
-              <Button
-                type="submit"
-                className=" px-16 mt-2 text-xl font-semibold "
-                variant={"green"}
-              >
+            <div className="text-left px-16">
+              <Button type="submit" className="  mt-2  font-semibold ">
                 Forgot Password
               </Button>
             </div>
