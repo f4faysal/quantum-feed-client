@@ -84,6 +84,16 @@ export const authApi = baseApi.injectEndpoints({
         data: data,
       }),
     }),
+
+    // change password
+
+    changePassword: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/change-password`,
+        method: "POST",
+        data: data,
+      }),
+    }),
   }),
 });
 
@@ -97,4 +107,5 @@ export const {
   useFollowCountQuery,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useChangePasswordMutation,
 } = authApi;
