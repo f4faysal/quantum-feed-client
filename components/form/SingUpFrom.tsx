@@ -125,7 +125,6 @@ const SingUpFrom = () => {
                 People who use our service may have uploaded your contact
                 information to <br /> Tuntuni Feed.{" "}
                 <a className="hover:underline text-blue-600" href="#">
-                  {" "}
                   Learn more.
                 </a>
               </p>
