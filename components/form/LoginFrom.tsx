@@ -18,6 +18,7 @@ import { useUserLoginMutation } from "@/redux/api/authApi";
 import { onOpen } from "@/redux/features/modal/modalSlice";
 import { storeUserInfo } from "@/services/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { Separator } from "../ui/separator";
 
@@ -107,9 +108,12 @@ const LoginFrom = () => {
           </form>
 
           <div className=" text-center  mt-1">
-            <a href="#" className="text-blue-500 text-sm hover:underline">
+            <Link
+              href="/auth"
+              className="text-blue-500 text-sm hover:underline"
+            >
               Forgot Password?
-            </a>
+            </Link>
           </div>
           <p className="text-red-600 text-sm">{res}</p>
         </Form>

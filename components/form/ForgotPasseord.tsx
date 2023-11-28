@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useForgotPasswordMutation } from "@/redux/api/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
@@ -22,6 +23,7 @@ const formSchema = z.object({
 
 const ForgotPassword = () => {
   const [res, setRes] = useState<any>(null);
+  const [forgotPassword] = useForgotPasswordMutation();
 
   const router = useRouter();
 
@@ -35,8 +37,8 @@ const ForgotPassword = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       console.log(values);
-      // const res = await forgotPassword(values);
-      // console.log(res);
+      const res = await forgotPassword(values);
+      console.log(res);
       // if (res?.data?.accessToken) {
       //   router.push("/");
       //   form.reset();
