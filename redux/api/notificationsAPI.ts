@@ -11,9 +11,9 @@ export const notificationsAPI = baseApi.injectEndpoints({
         url: `${Notifications_API}/`,
         method: "GET",
       }),
-      providesTags: [tagTypes.post],
+      providesTags: [tagTypes.notification],
     }),
   }),
 });
 
-export const {} = notificationsAPI;
+export const { useNotificationsQuery } = notificationsAPI;

@@ -31,7 +31,7 @@ const Sidebar = () => {
       label: "Notifications",
       href: "/notifications",
       auth: true,
-      alert: true,
+      alert: user?.hasNotification,
     },
     {
       icon: MdOutlineOndemandVideo,
