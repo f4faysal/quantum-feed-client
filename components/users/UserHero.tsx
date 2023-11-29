@@ -61,20 +61,22 @@ const UserHero: React.FC<UserHeroProps> = ({ username }) => {
   return (
     <div>
       <div className="bg-neutral-700 h-44 relative">
-        <span className="absolute top-1 right-3 text-white z-10 cursor-pointer ">
-          <CldUploadWidget
-            onUpload={onUploadCoverImage}
-            uploadPreset="sf4vsqtt"
-          >
-            {({ open }) => {
-              const onClick = () => {
-                open();
-              };
+        {user?.username === username && (
+          <span className="absolute top-1 right-3 text-white z-10 cursor-pointer ">
+            <CldUploadWidget
+              onUpload={onUploadCoverImage}
+              uploadPreset="sf4vsqtt"
+            >
+              {({ open }) => {
+                const onClick = () => {
+                  open();
+                };
 
-              return <div onClick={onClick}>edit</div>;
-            }}
-          </CldUploadWidget>
-        </span>
+                return <div onClick={onClick}>edit</div>;
+              }}
+            </CldUploadWidget>
+          </span>
+        )}
         {data?.coverImage && (
           <Image
             src={coverImage}
@@ -91,9 +93,17 @@ const UserHero: React.FC<UserHeroProps> = ({ username }) => {
             };
 
             return (
-              <div onClick={onClick} className="absolute -bottom-16 left-4">
-                <Avatar userId={profileImage} isLarge hasBorder />
-              </div>
+              <>
+                {user?.username === username ? (
+                  <div onClick={onClick} className="absolute -bottom-16 left-4">
+                    <Avatar userId={profileImage} isLarge hasBorder />
+                  </div>
+                ) : (
+                  <div className="absolute -bottom-16 left-4">
+                    <Avatar userId={profileImage} isLarge hasBorder />
+                  </div>
+                )}
+              </>
             );
           }}
         </CldUploadWidget>

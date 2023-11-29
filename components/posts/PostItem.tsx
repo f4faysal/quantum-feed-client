@@ -68,7 +68,9 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
     }
   };
 
-  //   const LikeIcon = hasLiked ? AiFillHeart : AiOutlineHeart;
+  const hasLiked = data?.likedIds.includes(user?.id);
+  console.log(hasLiked);
+
   const LikeIcon = data?.likedIds.length ? AiFillHeart : AiOutlineHeart;
 
   const createdAt = useMemo(() => {
@@ -85,7 +87,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
         border-b-[1px] 
         border
         p-5 
-        cursor-pointer 
+     
         hover:bg-white
         transition
         flex
@@ -94,7 +96,9 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
     >
       <div className="flex flex-col w-full  gap-3">
         <div className="flex justify-between items-center">
-          <Avatar userId={data?.user?.profileImage} />
+          <div onClick={goToUser}>
+            <Avatar userId={data?.user?.profileImage} />
+          </div>
           <div>
             {user?.id === data?.userId && (
               <DropdownMenu>
@@ -158,9 +162,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             <span className="text-neutral-500 text-sm">{createdAt}</span>
           </div>
           <div className="mt-1">
-            <p onClick={goToPost} className="text-base">
-              {data?.body}
-            </p>
+            <p className="text-base">{data?.body}</p>
             {data?.image && (
               <div
                 onClick={goToPost}
@@ -205,7 +207,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             "
             >
               {/* <LikeIcon color={hasLiked ? "red" : ""} size={20} /> */}
-              <LikeIcon color={true ? "red" : ""} size={20} />
+              <LikeIcon color={hasLiked ? "red" : ""} size={20} />
               <p>{data.likedIds.length}</p>
             </div>
           </div>
