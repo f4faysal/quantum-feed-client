@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
-import ImageUpload from "../ImageUpload";
 import Input from "../Input";
 
 const EditProfileForm = () => {
@@ -82,20 +81,7 @@ const EditProfileForm = () => {
 
   return (
     <div>
-      {" "}
       <div className="flex flex-col gap-4">
-        <ImageUpload
-          value={profileImage}
-          disabled={isLoading}
-          onChange={(image) => setProfileImage(image)}
-          label="Upload profile image"
-        />
-        <ImageUpload
-          value={coverImage}
-          disabled={isLoading}
-          onChange={(image) => setCoverImage(image)}
-          label="Upload cover image"
-        />
         <Input
           placeholder="Name"
           onChange={(e) => setName(e.target.value)}

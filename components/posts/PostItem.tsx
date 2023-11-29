@@ -91,7 +91,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
         justify-between
       "
     >
-      <div onClick={goToPost} className="flex flex-row items-start gap-3">
+      <div onClick={goToPost} className="flex  flex-col items-start gap-3">
         <Avatar userId={data?.user?.profileImage} />
         <div>
           <div className="flex flex-row items-center gap-2">

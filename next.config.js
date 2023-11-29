@@ -2,7 +2,7 @@
 const nextConfig = {
    
     images: {
-        domains: ['utfs.io', 'cdn.sanity.io'],
+        domains: ['res.cloudinary.com', 'cdn.sanity.io'],
     },
   
 }
