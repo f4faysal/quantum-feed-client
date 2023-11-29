@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
 import EditProfileForm from "../form/EditProfileForm";
 import MainModal from "../modals/main-modal";
+import { ClipLoader } from "react-spinners";
 
 interface UserBioProps {
   username: string;
@@ -41,7 +42,12 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
 
     return format(new Date(user.createdAt), "MMMM yyyy");
   }, [user?.createdAt]);
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-full">
+        <ClipLoader color="lightblue" size={20} />
+      </div>
+    );
   return (
     <div className="border-b-[1px] border- pb-4">
       <MainModal title="Edit your profile" description="It's quick and easy.">

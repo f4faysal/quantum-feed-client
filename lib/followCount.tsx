@@ -9,8 +9,6 @@ interface followCountProps {
 const FollowCount: React.FC<followCountProps> = ({ username }) => {
   const { data, isLoading } = useFollowCountQuery(username);
 
-  if (isLoading) return <div>Loading...</div>;
-
   return <p className="">{data || 0}</p>;
 };
 

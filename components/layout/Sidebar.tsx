@@ -47,11 +47,11 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="relative  col-span-1 h-full pr-4 md:pr-6">
+    <div className="relative col-span-2 lg:col-span-4 h-full  md:pr-6">
       <div className="sticky top-0  flex flex-col items-end">
-        <div className="space-y-2 lg:w-[230px]">
-          <div className=" flex gap-1 items-center py-2">
-            <GiNestBirds className="text-4xl text-sky-500" />
+        <div className="space-y-2 ">
+          <div className=" flex md:gap-1 items-center py-2 justify-center">
+            <GiNestBirds size={28} className=" text-sky-500" />
             <h1 className="hidden md:block text-xl font-bold">Tuntuni</h1>
           </div>
           <Link href={`/${user?.username}`}>

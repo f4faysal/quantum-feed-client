@@ -92,7 +92,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
         justify-between
       "
     >
-      <div onClick={goToPost} className="flex flex-col w-full  gap-3">
+      <div className="flex flex-col w-full  gap-3">
         <div className="flex justify-between items-center">
           <Avatar userId={data?.user?.profileImage} />
           <div>
@@ -158,9 +158,14 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             <span className="text-neutral-500 text-sm">{createdAt}</span>
           </div>
           <div className="mt-1">
-            <p className="text-base">{data?.body}</p>
+            <p onClick={goToPost} className="text-base">
+              {data?.body}
+            </p>
             {data?.image && (
-              <div className="relative w-full h-[250px] md:w-full md:h-[400px] rounded-md overflow-hidden  mt-2">
+              <div
+                onClick={goToPost}
+                className="relative w-full h-[250px] md:w-full md:h-[400px] rounded-md overflow-hidden  mt-2"
+              >
                 <Image
                   fill
                   className="object-cover"
@@ -183,7 +188,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
                 hover:text-sky-500
             "
             >
-              <AiOutlineMessage size={20} />
+              <AiOutlineMessage onClick={goToPost} size={20} />
               <p>{data.comments?.length || 0}</p>
             </div>
             <div

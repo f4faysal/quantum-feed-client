@@ -5,6 +5,7 @@ import MyPostFeed from "@/components/posts/MyPostFeed";
 import UserBio from "@/components/users/UserBio";
 import UserHero from "@/components/users/UserHero";
 import { useUserByUsernameQuery } from "@/redux/api/authApi";
+import { ClipLoader } from "react-spinners";
 
 interface UserProfileProps {
   params: {
@@ -15,7 +16,12 @@ interface UserProfileProps {
 const UserProfile: React.FC<UserProfileProps> = ({ params }) => {
   const { data, isLoading } = useUserByUsernameQuery(params.username);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+  return (
+    <div className="flex justify-center items-center h-full">
+      <ClipLoader color="lightblue" size={20} />
+    </div>
+  );
   return (
     <div>
       <Header showBackArrow label={data?.name} />

@@ -16,7 +16,7 @@ const MyPostFeed: React.FC<MyPostFeedProps> = ({ user }) => {
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-full">
-        <ClipLoader color="lightblue" size={80} />
+        <ClipLoader color="lightblue" size={20} />
       </div>
     );
   return (

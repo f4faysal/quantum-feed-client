@@ -57,7 +57,7 @@ const PostForm: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
 
   return (
     <div className="border-b-[1px] border px-5 py-2">
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <div>
           <Avatar userId={currentUser?.profileImage} />
         </div>
@@ -120,7 +120,7 @@ const PostForm: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
                     ) : (
                       <ImagePlus
                         onClick={onClick}
-                        className="h-8 w-8 mt-2 cursor-pointer"
+                        className="h-6 w-6 mt-2 cursor-pointer"
                       />
                     )}
                   </div>
