@@ -10,10 +10,10 @@ import { useMemo } from "react";
 import toast from "react-hot-toast";
 import { BiCalendar } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 import Button from "../Button";
 import EditProfileForm from "../form/EditProfileForm";
 import MainModal from "../modals/main-modal";
-import { ClipLoader } from "react-spinners";
 
 interface UserBioProps {
   username: string;
@@ -44,7 +44,7 @@ const UserBio: React.FC<UserBioProps> = ({ username }) => {
   }, [user?.createdAt]);
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-screen">
         <ClipLoader color="lightblue" size={20} />
       </div>
     );

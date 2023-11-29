@@ -6,8 +6,8 @@ import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Avatar from "../Avatar";
 import { ClipLoader } from "react-spinners";
+import Avatar from "../Avatar";
 
 interface UserHeroProps {
   username: string;
@@ -53,11 +53,11 @@ const UserHero: React.FC<UserHeroProps> = ({ username }) => {
   );
 
   if (isLoading)
-  return (
-    <div className="flex justify-center items-center h-full">
-      <ClipLoader color="lightblue" size={20} />
-    </div>
-  );
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ClipLoader color="lightblue" size={20} />
+      </div>
+    );
   return (
     <div>
       <div className="bg-neutral-700 h-44 relative">

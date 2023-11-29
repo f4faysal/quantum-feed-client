@@ -18,7 +18,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ params }) => {
 
   if (isLoading)
   return (
-    <div className="flex justify-center items-center h-full">
+    <div className="flex justify-center items-center h-screen">
       <ClipLoader color="lightblue" size={20} />
     </div>
   );

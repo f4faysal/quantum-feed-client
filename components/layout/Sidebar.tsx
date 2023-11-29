@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { authKey } from "@/constants/storageKey";
+import { useUpdateUserMutation } from "@/redux/api/authApi";
 import { removeUserInfo } from "@/services/auth.service";
 import Link from "next/link";
 import { BsBellFill, BsHouseFill } from "react-icons/bs";
@@ -15,6 +16,16 @@ import SidebarItem from "./SidebarItem";
 
 const Sidebar = () => {
   const user = useSelector((state: any) => state.user.user);
+  const [updateUser] = useUpdateUserMutation();
+
+  const x = async () => {
+    const res = await updateUser({
+      id: user?.id,
+      data: {
+        hasNotification: false,
+      },
+    });
+  };
 
   const items = [
     {
@@ -33,6 +44,7 @@ const Sidebar = () => {
       href: "/notifications",
       auth: true,
       alert: user?.hasNotification,
+      onclick: x,
     },
     {
       icon: FaVideo,
@@ -79,6 +91,7 @@ const Sidebar = () => {
               href={item.href}
               icon={item.icon}
               label={item.label}
+              onClick={item.onclick}
             />
           ))}
           <SidebarItem

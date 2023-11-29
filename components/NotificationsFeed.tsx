@@ -1,18 +1,11 @@
 "use client";
 
-import { useUpdateUserMutation } from "@/redux/api/authApi";
 import { useNotificationsQuery } from "@/redux/api/notificationsAPI";
-import { useCallback } from "react";
 import { GiNestBirds } from "react-icons/gi";
 import { ClipLoader } from "react-spinners";
 
 const NotificationsFeed = () => {
-  const [updateUser] = useUpdateUserMutation();
-
   const { data, isLoading } = useNotificationsQuery({});
-  console.log(data);
-
-  useCallback(async () => {}, []);
 
   if (data?.length === 0) {
     return (
@@ -24,7 +17,7 @@ const NotificationsFeed = () => {
 
   if (isLoading)
     return (
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-screen">
         <ClipLoader color="lightblue" size={20} />
       </div>
     );
