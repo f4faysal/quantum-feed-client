@@ -19,15 +19,15 @@ const PostViewPage: React.FC<PostViewPageProps> = ({ params }) => {
 
   const { data, isLoading } = usePostQuery(postId);
 
-  if (!data) {
-    router.push("/");
-  }
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-screen">
         <ClipLoader color="lightblue" size={20} />
       </div>
     );
+  if (!data) {
+    router.push("/");
+  }
 
   return (
     <div>
