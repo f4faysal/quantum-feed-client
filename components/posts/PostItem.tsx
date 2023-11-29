@@ -21,6 +21,7 @@ import {
   useLikePostMutation,
 } from "@/redux/api/postAip";
 import { Edit, Share, Trash } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -40,9 +41,9 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   const goToUser = useCallback(
     (ev: any) => {
       ev.stopPropagation();
-      router.push(`/${data.user.username}`);
+      router.push(`/${data?.user?.username}`);
     },
-    [router, data.user.username]
+    [router, data?.user?.username]
   );
 
   const goToPost = useCallback(() => {
@@ -91,10 +92,46 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
         justify-between
       "
     >
-      <div onClick={goToPost} className="flex  flex-col items-start gap-3">
-        <Avatar userId={data?.user?.profileImage} />
+      <div onClick={goToPost} className="flex flex-col w-full  gap-3">
+        <div className="flex justify-between items-center">
+          <Avatar userId={data?.user?.profileImage} />
+          <div>
+            {user?.id === data?.userId && (
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <span className="text-xl">
+                    <HiOutlineDotsVertical />
+                  </span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() => {
+                      toast.success("Shared post Coming soon");
+                    }}
+                  >
+                    <Share className="mr-2 h-4 w-4" />
+                    <span>Share</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handelDelete}>
+                    <Trash className="mr-2 h-4 w-4 text-red-600" />
+                    <span>Delete</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      toast.success("Edited Coming soon");
+                    }}
+                  >
+                    <Edit className="mr-2 h-4 w-4" />
+                    <span>Edit</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+          </div>
+        </div>
         <div>
-          <div className="flex flex-row items-center gap-2">
+          <div className="flex gap-2 items-center">
             <p
               onClick={goToUser}
               className="
@@ -120,7 +157,19 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             </span>
             <span className="text-neutral-500 text-sm">{createdAt}</span>
           </div>
-          <div className=" mt-1">{data.body}</div>
+          <div className="mt-1">
+            <p className="text-base">{data?.body}</p>
+            {data?.image && (
+              <div className="relative w-full h-[250px] md:w-full md:h-[400px] rounded-md overflow-hidden  mt-2">
+                <Image
+                  fill
+                  className="object-cover"
+                  alt="Image"
+                  src={data?.image}
+                />
+              </div>
+            )}
+          </div>
           <div className="flex flex-row items-center mt-3 gap-10">
             <div
               className="
@@ -156,41 +205,6 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div>
-        {user?.id === data?.userId && (
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <span className="text-xl">
-                <HiOutlineDotsVertical />
-              </span>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => {
-                  toast.success("Shared post Coming soon");
-                }}
-              >
-                <Share className="mr-2 h-4 w-4" />
-                <span>Share</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handelDelete}>
-                <Trash className="mr-2 h-4 w-4 text-red-600" />
-                <span>Delete</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  toast.success("Edited Coming soon");
-                }}
-              >
-                <Edit className="mr-2 h-4 w-4" />
-                <span>Edit</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        )}
       </div>
     </div>
   );
