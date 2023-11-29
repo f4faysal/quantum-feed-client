@@ -1,6 +1,5 @@
 "use client";
 
-import Loading from "@/app/loading";
 import { useMyProfileQuery } from "@/redux/api/authApi";
 import { setUser } from "@/redux/features/user/userSlice";
 import { useAppDispatch } from "@/redux/hooks";
@@ -30,10 +29,6 @@ const Header: React.FC<HeaderProps> = ({ showBackArrow, label }) => {
   const handleBack = useCallback(() => {
     router.back();
   }, [router]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <div className="border-b-[1px] border p-5">

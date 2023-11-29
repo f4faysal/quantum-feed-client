@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useResetPasswordMutation } from "@/redux/api/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().optional(),
@@ -26,18 +26,22 @@ const formSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters" }),
 });
 
-const ResetPassword = ({ searchParams }: any) => {
+const ResetPassword = () => {
+  const searchParams = useSearchParams();
+
+  const email = searchParams.get("email");
+  const token = searchParams.get("token");
+
+  console.log(email, token);
   const [res, setRes] = useState<any>(null);
   const [resetPassword] = useResetPasswordMutation();
 
   const router = useRouter();
 
-  const { token, email } = searchParams;
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: email,
+      email: email || "",
       password: "",
     },
   });
@@ -45,7 +49,7 @@ const ResetPassword = ({ searchParams }: any) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const res: any = await resetPassword({
-        token: token,
+        token: token || "",
         newPassword: values.password,
       });
       if (res?.data) {

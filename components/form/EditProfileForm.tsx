@@ -49,7 +49,7 @@ const EditProfileForm = () => {
         data: updateData,
         id: currentUser?.id,
       });
-      console.log(res);
+
       if (res?.data) {
         toast.success("Updated");
         dispatch(onClose());

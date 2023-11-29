@@ -13,7 +13,17 @@ export const notificationsAPI = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.notification],
     }),
+    // update notification status
+    updateNotification: build.mutation({
+      query: (data) => ({
+        url: `${Notifications_API}/update/${data.id}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: [tagTypes.notification],
+    }),
   }),
 });
 
-export const { useNotificationsQuery } = notificationsAPI;
+export const { useNotificationsQuery, useUpdateNotificationMutation } =
+  notificationsAPI;
