@@ -34,7 +34,7 @@ To get started with Tuntuni Feed, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/tuntuni-feed.git
+   git clone https://github.com/f4faysal/opti-feed-backend.git
    ```
 
 2. **Install Dependencies:**
