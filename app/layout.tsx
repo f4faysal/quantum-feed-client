@@ -14,6 +14,7 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Tuntuni Feed",
   description: "A feed reader for the modern web.",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
