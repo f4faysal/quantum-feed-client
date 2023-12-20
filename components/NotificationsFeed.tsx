@@ -1,8 +1,8 @@
 "use client";
 
 import { useNotificationsQuery } from "@/redux/api/notificationsAPI";
-import { GiNestBirds } from "react-icons/gi";
 import { ClipLoader } from "react-spinners";
+import NotificationsFeedItem from "./NotificationsFeedItem";
 
 const NotificationsFeed = () => {
   const { data, isLoading } = useNotificationsQuery({});
@@ -23,14 +23,11 @@ const NotificationsFeed = () => {
     );
   return (
     <div className="flex flex-col">
-      {data?.map((notification: Record<string, any>) => (
-        <div
-          key={notification.id}
-          className="flex flex-row items-center p-6 gap-4 border-b-[1px] border"
-        >
-          <GiNestBirds size={32} />
-          <p className="">{notification.body}</p>
-        </div>
+      {data?.slice(0, 20).map((notification: Record<string, any>) => (
+        <NotificationsFeedItem
+          key={notification?.id}
+          notification={notification}
+        />
       ))}
     </div>
   );

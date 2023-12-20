@@ -8,9 +8,9 @@ import Link from "next/link";
 import { BsBellFill, BsHouseFill } from "react-icons/bs";
 import { FaUserFriends } from "react-icons/fa";
 import { FaVideo } from "react-icons/fa6";
-import { GiNestBirds } from "react-icons/gi";
 import { IoMdSettings } from "react-icons/io";
 import { IoLogOut } from "react-icons/io5";
+import { PiBirdFill } from "react-icons/pi";
 import { useSelector } from "react-redux";
 import SidebarItem from "./SidebarItem";
 
@@ -62,8 +62,8 @@ const Sidebar = () => {
     <div className="relative col-span-2 lg:col-span-4 h-full  md:pr-6">
       <div className="sticky top-0  flex flex-col items-end">
         <div className="space-y-2 ">
-          <div className=" flex md:gap-1 items-center py-2 justify-center">
-            <GiNestBirds size={28} className=" text-sky-500" />
+          <div className=" md:pl-3 flex md:gap-3 items-center py-2 justify-center md:justify-start">
+            <PiBirdFill className="my-3 md:my-0 text-3xl md:text-4xl text-sky-500" />
             <h1 className="hidden md:block text-xl font-bold">Tuntuni</h1>
           </div>
           <Link href={`/${user?.username}`}>

@@ -69,7 +69,6 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
   };
 
   const hasLiked = data?.likedIds.includes(user?.id);
-  console.log(hasLiked);
 
   const LikeIcon = data?.likedIds.length ? AiFillHeart : AiOutlineHeart;
 
