@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   
     images: {
-        domains: ['res.cloudinary.com', 'cdn.sanity.io'],
+      domains: ["res.cloudinary.com", "cdn.sanity.io"],
     },
+  };
   
-}
-
-module.exports = nextConfig
+  const withPWA = require("next-pwa")({
+    dest: "public",
+  });
+  
+  // Merge configurations
+  module.exports = {
+    ...nextConfig,
+    ...withPWA,
+    // other configurations if needed
+  };
+  
